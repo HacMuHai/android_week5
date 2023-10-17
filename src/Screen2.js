@@ -8,7 +8,6 @@ function Screen2({ navigation,route }) {
   
   const [pathImgPhone, setPathImgPhone] = useState(route.params)
   console.log(pathImgPhone)
-  // const [mauChon,setMauChon] =  useState(require('../assets/vs_red.png'))
   const onChangeMau = (vMau) => {
     switch (vMau) {
       case 'silver':

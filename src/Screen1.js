@@ -1,13 +1,13 @@
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { DataContext } from "./DataContext";
 
 
 export default function App({ navigation, route }) {
-  // console.log("param: " + mau)
-  // console.log(typeof route.params !== 'undefined')
-  // console.log(route.params || require('../assets/vs_black.png'))
   const [pathImgPhone, setPathImgPhone] = useState(route.params || require('../assets/vs_black.png'));
-  console.log("cuoi: "+pathImgPhone)
+  const dataPhone = useContext(DataContext)
+
+
 
   useEffect(()=>{
     setPathImgPhone(route.params || require('../assets/vs_black.png'))
@@ -22,7 +22,8 @@ export default function App({ navigation, route }) {
         />
       </View>
       <View style={styles.containerInfo}>
-        <Text style={styles.txtName}>Điện Thoại Vsmart Joy 3 - Hàng chính hãng</Text>
+        {/* <Text style={styles.txtName}>Điện Thoại Vsmart Joy 3 - Hàng chính hãng</Text> */}
+        <Text style={styles.txtName}>{dataPhone.name}</Text>
         <View style={styles.boxDanhGia}>
           <View style={styles.boxStar}>
             <Image
@@ -46,11 +47,11 @@ export default function App({ navigation, route }) {
               source={require('../assets/star.png')}
             />
           </View>
-          <Text style={styles.txtSLDanhGia}>(Xem 828 đánh giá)</Text>
+          <Text style={styles.txtSLDanhGia}>(Xem {dataPhone.soDanhGia} đánh giá)</Text>
         </View>
         <View style={styles.boxPrice}>
-          <Text style={styles.txtGiaBan}>1.790.000 đ</Text>
-          <Text style={styles.txtGiaGoc}>1.990.000 đ</Text>
+          <Text style={styles.txtGiaBan}>{dataPhone.priceAct.toLocaleString('de-DE')} đ</Text>
+          <Text style={styles.txtGiaGoc}>{dataPhone.price.toLocaleString('de-DE')} đ</Text>
         </View>
         <View style={styles.boxHoanTien}>
           <Text style={styles.txtHoanTien}>Ở ĐÂU RẺ HƠN HOÀN TIỀN</Text>
@@ -64,7 +65,7 @@ export default function App({ navigation, route }) {
       </View>
 
       <View style={styles.containerBtn}>
-        <TouchableOpacity style={styles.btnChuyenMau} onPress={() => navigation.navigate('Screen2', pathImgPhone)}>
+        <TouchableOpacity style={styles.btnChuyenMau} onPress={() => navigation.push('Screen2', pathImgPhone)}>
           <Text style={styles.txtChuyenMau}>4 MÀU-CHỌN MÀU</Text>
           <Image
             style={styles.imgPass}
