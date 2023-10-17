@@ -1,17 +1,12 @@
-import React, { useState,useEffect,useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { DataContext } from "./DataContext";
 
 
 export default function App({ navigation, route }) {
-  const [pathImgPhone, setPathImgPhone] = useState(route.params || require('../assets/vs_black.png'));
+  const {mau,pathImgPhone} = typeof  route.params !=='undefined' ? route.params : {mau:1,pathImgPhone:require('../assets/vs_red.png')}
   const dataPhone = useContext(DataContext)
 
-
-
-  useEffect(()=>{
-    setPathImgPhone(route.params || require('../assets/vs_black.png'))
-  },[route.params])
   return (
     <View style={styles.container}>
       <View style={styles.containerImg}>
@@ -65,7 +60,7 @@ export default function App({ navigation, route }) {
       </View>
 
       <View style={styles.containerBtn}>
-        <TouchableOpacity style={styles.btnChuyenMau} onPress={() => navigation.push('Screen2', pathImgPhone)}>
+        <TouchableOpacity style={styles.btnChuyenMau} onPress={() => navigation.push('Screen2', mau)}>
           <Text style={styles.txtChuyenMau}>4 MÀU-CHỌN MÀU</Text>
           <Image
             style={styles.imgPass}

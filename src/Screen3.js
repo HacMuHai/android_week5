@@ -6,6 +6,7 @@ import { DataContext } from "./DataContext";
 
 // export default function Screen2({navigation}) {
 function Screen2({ navigation, route }) {
+  const dataPhone = useContext(DataContext)
   const [pathImgPhone, setPathImgPhone] = useState(require('../assets/vs_silver.png'))
   const [mau,setMau] = useState(route.params || 0)
   const onChangeMau = (vMau) => {
@@ -32,6 +33,18 @@ function Screen2({ navigation, route }) {
     onChangeMau(mau)
   }, [route.params])
 
+  function tenMau(vMau){
+    switch (vMau) {
+      case 0:
+        return 'bạc'
+      case 1:
+        return 'đỏ'
+      case 2:
+        return 'đen'
+      default:
+        return 'xanh dương'
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -46,6 +59,15 @@ function Screen2({ navigation, route }) {
         <View style={styles.boxInfo}>
           <Text style={styles.txtInfo}>Điện Thoại Vsmart Joy 3</Text>
           <Text style={styles.txtInfo}>Hàng chính hãng </Text>
+          <View style = {{gap:5, marginTop: 5}}>
+            <Text style={styles.txtInfo}>
+              Màu: <Text style={{ fontWeight: 'bold',fontSize:18}}>{tenMau(mau)}</Text>
+              </Text>
+            <Text style={styles.txtInfo}>
+              Cung cấp bởi <Text style={{ fontWeight: 'bold',fontSize:18}}>{dataPhone.suplly}</Text>
+              </Text>
+            <Text style={{ fontWeight: 'bold',fontSize:18}}>{dataPhone.priceAct.toLocaleString('de-DE')}</Text>
+          </View>
         </View>
       </View>
 
