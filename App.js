@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Screen1 from './src/Screen1';
-import ScreenChonMau from './src/Screen2';
+import ScreenChonMau from './src/Screen3';
 import { DataContext, dataPhone } from './src/DataContext';
 
 
